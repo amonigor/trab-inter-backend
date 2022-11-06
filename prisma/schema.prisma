@@ -37,8 +37,8 @@ enum SuggestionType {
 model user {
   id         String       @id @default(uuid())
   name       String       @db.VarChar(80)
-  username   String       @db.VarChar(50)
-  email      String       @db.VarChar(255)
+  username   String       @unique @db.VarChar(50)
+  email      String       @unique @db.VarChar(255)
   password   String       @db.VarChar(255)
   Suggestion suggestion[]
   Moderator  moderator[]
