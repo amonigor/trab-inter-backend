@@ -5,9 +5,16 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { CommunitiesModule } from './communities/communities.module';
 import { ContentsModule } from './contents/contents.module';
+import { SuggestionsModule } from './suggestions/suggestions.module';
 
 @Module({
-  imports: [UsersModule, CommunitiesModule, ContentsModule, ModeratorsModule],
+  imports: [
+    UsersModule,
+    CommunitiesModule,
+    ContentsModule,
+    ModeratorsModule,
+    SuggestionsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
