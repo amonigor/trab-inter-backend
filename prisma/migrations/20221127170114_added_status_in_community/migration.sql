@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `community` ADD COLUMN `status` ENUM('PENDING', 'APPROVED', 'DENIED') NOT NULL DEFAULT 'PENDING';

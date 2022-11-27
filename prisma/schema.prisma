@@ -54,6 +54,7 @@ model community {
   id          String               @id @default(uuid())
   name        String               @db.VarChar(80)
   description String               @db.LongText
+  status      Status               @default(PENDING)
   categories  community_category[]
   Content     content[]
   Moderator   moderator[]
