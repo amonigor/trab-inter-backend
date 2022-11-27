@@ -45,7 +45,7 @@ model user {
   username          String               @unique @db.VarChar(50)
   email             String               @unique @db.VarChar(255)
   password          String               @db.VarChar(255)
-  SuggestionContent suggestion_content[]
+  SuggestionContent suggestion[]
   Moderator         moderator[]
 }
 
@@ -76,10 +76,10 @@ model content {
   status       ContentStatus        @default(ACTIVE)
   Community    community            @relation(fields: [id_community], references: [id])
   id_community String
-  Suggestion   suggestion_content[]
+  Suggestion   suggestion[]
 }
 
-model suggestion_content {
+model suggestion {
   id                  String         @id @default(uuid())
   type                SuggestionType @default(INSERT)
   status              Status         @default(PENDING)
