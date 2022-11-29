@@ -57,6 +57,27 @@ export class CommunitiesService {
     });
   }
 
+  async findRelatedCommunities(id: string) {
+    const community = await this.prisma.community.findUnique({
+      where: { id },
+    });
+
+    return this.prisma.community.findMany({
+      where: {
+        status: Status.APPROVED,
+        id_category: community.id_category,
+        NOT: { id },
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        category: true,
+        _count: true,
+      },
+    });
+  }
+
   update(id: string, updateCommunityDto: UpdateCommunityDto) {
     return this.prisma.community.update({
       where: { id },

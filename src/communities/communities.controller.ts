@@ -44,6 +44,11 @@ export class CommunitiesController {
     return this.contentsService.findContentByCommunity(id, status);
   }
 
+  @Get(':id/related')
+  findRelatedCommunities(@Param('id') id: string) {
+    return this.communitiesService.findRelatedCommunities(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
