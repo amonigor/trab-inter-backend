@@ -40,11 +40,11 @@ enum SuggestionType {
 }
 
 model user {
-  id                String               @id @default(uuid())
-  name              String               @db.VarChar(80)
-  username          String               @unique @db.VarChar(50)
-  email             String               @unique @db.VarChar(255)
-  password          String               @db.VarChar(255)
+  id                String       @id @default(uuid())
+  name              String       @db.VarChar(80)
+  username          String       @unique @db.VarChar(50)
+  email             String       @unique @db.VarChar(255)
+  password          String       @db.VarChar(255)
   SuggestionContent suggestion[]
   Moderator         moderator[]
 }
@@ -52,6 +52,7 @@ model user {
 model category {
   id          String      @id @default(uuid())
   name        String      @db.VarChar(255)
+  color       String      @db.VarChar(255)
   communities community[]
 }
 
@@ -67,14 +68,14 @@ model community {
 }
 
 model content {
-  id           String               @id @default(uuid())
-  description  String               @db.VarChar(255)
-  link         String               @db.VarChar(500)
-  value        Decimal              @db.Decimal(10, 2)
+  id           String        @id @default(uuid())
+  description  String        @db.VarChar(255)
+  link         String        @db.VarChar(500)
+  value        Decimal       @db.Decimal(10, 2)
   level        Level
   type         ContentType
-  status       ContentStatus        @default(ACTIVE)
-  Community    community            @relation(fields: [id_community], references: [id])
+  status       ContentStatus @default(ACTIVE)
+  Community    community     @relation(fields: [id_community], references: [id])
   id_community String
   Suggestion   suggestion[]
 }
