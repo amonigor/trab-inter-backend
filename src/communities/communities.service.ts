@@ -39,6 +39,7 @@ export class CommunitiesService {
         name: true,
         description: true,
         category: true,
+        _count: true,
       },
     });
   }
@@ -52,6 +53,7 @@ export class CommunitiesService {
         description: true,
         category: true,
         content: true,
+        _count: true,
       },
     });
   }
