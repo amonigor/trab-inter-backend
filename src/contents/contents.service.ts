@@ -16,7 +16,7 @@ export class ContentsService {
       level: createContentDto.level,
       type: createContentDto.type,
       status: createContentDto.status,
-      Community: {
+      community: {
         connect: {
           id: createContentDto.id_community,
         },

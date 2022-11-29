@@ -8,12 +8,12 @@ export class ModeratorsService {
 
   create(createModeratorDto: CreateModeratorDto) {
     const data = {
-      User: {
+      user: {
         connect: {
           id: createModeratorDto.id_user,
         },
       },
-      Community: {
+      community: {
         connect: {
           id: createModeratorDto.id_community,
         },

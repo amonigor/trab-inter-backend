@@ -16,12 +16,12 @@ export class SuggestionsService {
       content_value: createSuggestionDto.value,
       content_level: createSuggestionDto.level,
       content_type: createSuggestionDto.content_type,
-      Content: {
+      content: {
         connect: {
           id: createSuggestionDto.id_content,
         },
       },
-      User: {
+      user: {
         connect: {
           id: createSuggestionDto.id_user,
         },

@@ -97,7 +97,7 @@ model suggestion {
 
 model moderator {
   id           String    @default(uuid())
-  User         user      @relation(fields: [id_user], references: [id])
+  user         user      @relation(fields: [id_user], references: [id])
   id_user      String
   community    community @relation(fields: [id_community], references: [id])
   id_community String

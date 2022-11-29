@@ -11,7 +11,7 @@ export class CommunitiesService {
     const data = {
       name: createCommunityDto.name,
       description: createCommunityDto.description,
-      Category: {
+      category: {
         id: createCommunityDto.id_category,
       },
     };
@@ -34,6 +34,7 @@ export class CommunitiesService {
         id: true,
         name: true,
         description: true,
+        category: true,
       },
     });
   }
@@ -45,6 +46,8 @@ export class CommunitiesService {
         id: true,
         name: true,
         description: true,
+        category: true,
+        content: true,
       },
     });
   }
