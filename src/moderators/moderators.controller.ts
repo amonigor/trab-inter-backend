@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ModeratorsService } from './moderators.service';
 import { CreateModeratorDto } from './dto/create-moderator.dto';
 
@@ -16,13 +16,21 @@ export class ModeratorsController {
     return this.moderatorsService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.moderatorsService.findOne(id);
-  // }
+  @Get(':id/:id_user/:id_community')
+  findOne(
+    @Param('id') id: string,
+    @Param('id_user') id_user: string,
+    @Param('id_community') id_community: string,
+  ) {
+    return this.moderatorsService.findOne(id, id_user, id_community);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.moderatorsService.remove(id);
-  // }
+  @Delete(':id/:id_user/:id_community')
+  remove(
+    @Param('id') id: string,
+    @Param('id_user') id_user: string,
+    @Param('id_community') id_community: string,
+  ) {
+    return this.moderatorsService.remove(id, id_user, id_community);
+  }
 }
