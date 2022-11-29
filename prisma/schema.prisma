@@ -45,8 +45,8 @@ model user {
   username          String       @unique @db.VarChar(50)
   email             String       @unique @db.VarChar(255)
   password          String       @db.VarChar(255)
-  SuggestionContent suggestion[]
-  Moderator         moderator[]
+  suggestionContent suggestion[]
+  moderator         moderator[]
 }
 
 model category {
@@ -61,7 +61,7 @@ model community {
   name        String      @db.VarChar(80)
   description String      @db.LongText
   status      Status      @default(PENDING)
-  Category    category    @relation(fields: [id_category], references: [id])
+  category    category    @relation(fields: [id_category], references: [id])
   id_category String
   content     content[]
   moderator   moderator[]
@@ -75,9 +75,9 @@ model content {
   level        Level
   type         ContentType
   status       ContentStatus @default(ACTIVE)
-  Community    community     @relation(fields: [id_community], references: [id])
+  community    community     @relation(fields: [id_community], references: [id])
   id_community String
-  Suggestion   suggestion[]
+  suggestion   suggestion[]
 }
 
 model suggestion {
@@ -89,9 +89,9 @@ model suggestion {
   content_value       Decimal?       @db.Decimal(10, 2)
   content_level       Level?
   content_type        ContentType?
-  Content             content?       @relation(fields: [id_content], references: [id])
+  content             content?       @relation(fields: [id_content], references: [id])
   id_content          String?
-  User                user           @relation(fields: [id_user], references: [id])
+  user                user           @relation(fields: [id_user], references: [id])
   id_user             String
 }
 
@@ -99,7 +99,7 @@ model moderator {
   id           String    @default(uuid())
   User         user      @relation(fields: [id_user], references: [id])
   id_user      String
-  Community    community @relation(fields: [id_community], references: [id])
+  community    community @relation(fields: [id_community], references: [id])
   id_community String
 
   @@id([id, id_user, id_community])
