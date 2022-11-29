@@ -12,7 +12,7 @@ import {
 import { CommunitiesService } from './communities.service';
 import { CreateCommunityDto } from './dto/create-community.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
-import { Status } from '@prisma/client';
+import { ContentStatus } from '@prisma/client';
 
 @Controller('communities')
 export class CommunitiesController {
@@ -39,7 +39,7 @@ export class CommunitiesController {
   @Get(':id/contents')
   findOneWithContents(
     @Param('id') id: string,
-    @Query('status') status?: Status,
+    @Query('status') status?: ContentStatus,
   ) {
     return this.contentsService.findContentByCommunity(id, status);
   }

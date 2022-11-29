@@ -7,4 +7,8 @@ export class CreateCommunityDto {
   @IsString()
   @IsNotEmpty()
   public description: string;
+
+  @IsString()
+  @IsNotEmpty()
+  public id_category: string;
 }

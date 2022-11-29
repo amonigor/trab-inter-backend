@@ -2,7 +2,7 @@ import { PrismaService } from './../prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateContentDto } from './dto/create-content.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
-import { Status } from '@prisma/client';
+import { ContentStatus } from '@prisma/client';
 
 @Injectable()
 export class ContentsService {
@@ -15,6 +15,7 @@ export class ContentsService {
       value: createContentDto.value,
       level: createContentDto.level,
       type: createContentDto.type,
+      status: createContentDto.status,
       Community: {
         connect: {
           id: createContentDto.id_community,
@@ -52,7 +53,7 @@ export class ContentsService {
     });
   }
 
-  async findContentByCommunity(id_community: string, status: Status) {
+  async findContentByCommunity(id_community: string, status: ContentStatus) {
     const starter = await this.prisma.content.findMany({
       where: { id_community, status, level: 'STARTER' },
       select: {

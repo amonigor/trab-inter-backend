@@ -1,4 +1,4 @@
-import { Status, ContentType, Level } from '@prisma/client';
+import { ContentType, Level, ContentStatus } from '@prisma/client';
 import { IsNumber, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateContentDto {
@@ -22,7 +22,7 @@ export class UpdateContentDto {
   @IsNotEmpty()
   public type: ContentType;
 
-  @IsEnum(Status)
+  @IsEnum(ContentStatus)
   @IsNotEmpty()
-  public status: Status;
+  public status: ContentStatus;
 }

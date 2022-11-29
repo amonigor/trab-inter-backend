@@ -11,6 +11,9 @@ export class CommunitiesService {
     const data = {
       name: createCommunityDto.name,
       description: createCommunityDto.description,
+      Category: {
+        id: createCommunityDto.id_category,
+      },
     };
 
     return this.prisma.community.create({
@@ -19,6 +22,8 @@ export class CommunitiesService {
         id: true,
         name: true,
         description: true,
+        status: true,
+        id_category: true,
       },
     });
   }
