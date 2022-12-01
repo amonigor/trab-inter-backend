@@ -101,7 +101,13 @@ export class CommunitiesService {
           },
         ],
       },
-      include: { category: true },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        category: true,
+        _count: true,
+      },
     });
   }
 
