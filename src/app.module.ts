@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { CommunitiesModule } from './communities/communities.module';
 import { ContentsModule } from './contents/contents.module';
 import { SuggestionsModule } from './suggestions/suggestions.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SuggestionsModule } from './suggestions/suggestions.module';
     ContentsModule,
     ModeratorsModule,
     SuggestionsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
