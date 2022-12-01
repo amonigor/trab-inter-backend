@@ -78,6 +78,32 @@ export class CommunitiesService {
     });
   }
 
+  search(term: string, id_category: string) {
+    return this.prisma.community.findMany({
+      where: {
+        AND: [
+          {
+            OR: [
+              {
+                name: {
+                  contains: term,
+                },
+              },
+              {
+                description: {
+                  contains: term,
+                },
+              },
+            ],
+          },
+          {
+            id_category,
+          },
+        ],
+      },
+    });
+  }
+
   update(id: string, updateCommunityDto: UpdateCommunityDto) {
     return this.prisma.community.update({
       where: { id },

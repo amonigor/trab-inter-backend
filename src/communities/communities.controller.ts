@@ -31,6 +31,14 @@ export class CommunitiesController {
     return this.communitiesService.findAll();
   }
 
+  @Get('search')
+  search(
+    @Query('term') term: string,
+    @Query('id_category') id_category: string,
+  ) {
+    return this.communitiesService.search(term, id_category);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.communitiesService.findOne(id);
