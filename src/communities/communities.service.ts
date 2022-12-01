@@ -111,6 +111,10 @@ export class CommunitiesService {
     });
   }
 
+  count() {
+    return this.prisma.community.count();
+  }
+
   update(id: string, updateCommunityDto: UpdateCommunityDto) {
     return this.prisma.community.update({
       where: { id },

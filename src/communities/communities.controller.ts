@@ -39,6 +39,11 @@ export class CommunitiesController {
     return this.communitiesService.search(term, id_category);
   }
 
+  @Get('count')
+  count() {
+    return this.communitiesService.count();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.communitiesService.findOne(id);
