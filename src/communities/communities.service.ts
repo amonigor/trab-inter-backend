@@ -101,6 +101,7 @@ export class CommunitiesService {
           },
         ],
       },
+      include: { category: true },
     });
   }
 
