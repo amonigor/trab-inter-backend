@@ -81,18 +81,19 @@ model content {
 }
 
 model suggestion {
-  id                  String         @id @default(uuid())
-  type                SuggestionType @default(INSERT)
-  status              Status         @default(PENDING)
-  content_description String?        @db.VarChar(255)
-  content_link        String?        @db.VarChar(500)
-  content_value       Decimal?       @db.Decimal(10, 2)
-  content_level       Level?
-  content_type        ContentType?
-  content             content?       @relation(fields: [id_content], references: [id])
-  id_content          String?
-  user                user           @relation(fields: [id_user], references: [id])
-  id_user             String
+  id                   String         @id @default(uuid())
+  type                 SuggestionType @default(INSERT)
+  status               Status         @default(PENDING)
+  content_description  String?        @db.VarChar(255)
+  content_link         String?        @db.VarChar(500)
+  content_value        Decimal?       @db.Decimal(10, 2)
+  content_level        Level?
+  content_type         ContentType?
+  content_id_community String?
+  content              content?       @relation(fields: [id_content], references: [id])
+  id_content           String?
+  user                 user           @relation(fields: [id_user], references: [id])
+  id_user              String
 }
 
 model moderator {
