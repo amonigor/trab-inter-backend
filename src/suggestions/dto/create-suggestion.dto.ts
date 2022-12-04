@@ -32,6 +32,10 @@ export class CreateSuggestionDto {
 
   @IsString()
   @IsNotEmpty()
+  public id_community?: string;
+
+  @IsString()
+  @IsNotEmpty()
   public id_content?: string;
 
   @IsString()
