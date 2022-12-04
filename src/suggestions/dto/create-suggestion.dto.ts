@@ -1,41 +1,37 @@
-import { ContentType, Level, Status, SuggestionType } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { ContentType, Level, SuggestionType } from '@prisma/client';
+import { IsEnum, IsNotEmpty, IsString, ValidateIf } from 'class-validator';
 
 export class CreateSuggestionDto {
   @IsEnum(SuggestionType)
   @IsNotEmpty()
   public type: SuggestionType;
 
-  @IsEnum(Status)
-  @IsNotEmpty()
-  public status: Status;
-
+  @ValidateIf((o) => 'description' in o)
   @IsString()
-  @IsNotEmpty()
-  public description: string;
+  public description?: string;
 
+  @ValidateIf((o) => 'link' in o)
   @IsString()
-  @IsNotEmpty()
-  public link: string;
+  public link?: string;
 
+  @ValidateIf((o) => 'value' in o)
   @IsString()
-  @IsNotEmpty()
-  public value: number;
+  public value?: number;
 
+  @ValidateIf((o) => 'level' in o)
   @IsEnum(Level)
-  @IsNotEmpty()
-  public level: Level;
+  public level?: Level;
 
+  @ValidateIf((o) => 'content_type' in o)
   @IsEnum(ContentType)
-  @IsNotEmpty()
-  public content_type: ContentType;
+  public content_type?: ContentType;
 
   @IsString()
   @IsNotEmpty()
-  public id_community?: string;
+  public id_community: string;
 
+  @ValidateIf((o) => 'id_content' in o)
   @IsString()
-  @IsNotEmpty()
   public id_content?: string;
 
   @IsString()

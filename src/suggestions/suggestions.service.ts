@@ -10,18 +10,19 @@ export class SuggestionsService {
   create(createSuggestionDto: CreateSuggestionDto) {
     const data = {
       type: createSuggestionDto.type,
-      status: createSuggestionDto.status,
-      content_description: createSuggestionDto.description,
-      content_link: createSuggestionDto.link,
-      content_value: createSuggestionDto.value,
-      content_level: createSuggestionDto.level,
-      content_type: createSuggestionDto.content_type,
+      content_description: createSuggestionDto.description || null,
+      content_link: createSuggestionDto.link || null,
+      content_value: createSuggestionDto.value || null,
+      content_level: createSuggestionDto.level || null,
+      content_type: createSuggestionDto.content_type || null,
       content_id_community: createSuggestionDto.id_community,
-      content: {
-        connect: {
-          id: createSuggestionDto.id_content,
-        },
-      },
+      content: createSuggestionDto.id_content
+        ? {
+            connect: {
+              id: createSuggestionDto.id_content,
+            },
+          }
+        : undefined,
       user: {
         connect: {
           id: createSuggestionDto.id_user,
