@@ -2,6 +2,7 @@ import { PrismaService } from './../prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateSuggestionDto } from './dto/create-suggestion.dto';
 import { UpdateSuggestionDto } from './dto/update-suggestion.dto';
+import { Status } from '@prisma/client';
 
 @Injectable()
 export class SuggestionsService {
@@ -82,6 +83,12 @@ export class SuggestionsService {
         id_content: true,
         id_user: true,
       },
+    });
+  }
+
+  findSuggestionByCommunity(id_community: string, status: Status) {
+    return this.prisma.suggestion.findMany({
+      where: { content_id_community: id_community, status },
     });
   }
 

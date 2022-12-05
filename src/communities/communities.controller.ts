@@ -12,13 +12,15 @@ import {
 import { CommunitiesService } from './communities.service';
 import { CreateCommunityDto } from './dto/create-community.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
-import { ContentStatus } from '@prisma/client';
+import { ContentStatus, Status } from '@prisma/client';
+import { SuggestionsService } from 'src/suggestions/suggestions.service';
 
 @Controller('communities')
 export class CommunitiesController {
   constructor(
     private readonly communitiesService: CommunitiesService,
     private readonly contentsService: ContentsService,
+    private readonly suggestionsService: SuggestionsService,
   ) {}
 
   @Post()
@@ -55,6 +57,14 @@ export class CommunitiesController {
     @Query('status') status?: ContentStatus,
   ) {
     return this.contentsService.findContentByCommunity(id, status);
+  }
+
+  @Get(':id/suggestions')
+  findOneWithSuggestions(
+    @Param('id') id: string,
+    @Query('status') status?: Status,
+  ) {
+    return this.suggestionsService.findSuggestionByCommunity(id, status);
   }
 
   @Get(':id/related')
