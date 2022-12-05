@@ -28,12 +28,15 @@ export class AuthService {
   validate(auth: string) {
     if (auth) {
       const tokenDecoded: any = this.jwtService.decode(auth);
-      const expireDate = new Date(tokenDecoded.exp * 1000);
-      const nowDate = new Date();
+      if (tokenDecoded) {
+        const expireDate = new Date(tokenDecoded.exp * 1000);
+        const nowDate = new Date();
 
-      if (expireDate > nowDate) return true;
+        if (expireDate > nowDate) return true;
+      }
+
+      throw new HttpException('Token inválido', HttpStatus.FORBIDDEN);
     }
-
     throw new HttpException('Token inválido', HttpStatus.FORBIDDEN);
   }
 }
