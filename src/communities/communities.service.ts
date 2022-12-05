@@ -8,7 +8,7 @@ import { Status } from '@prisma/client';
 export class CommunitiesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createCommunityDto: CreateCommunityDto) {
+  async create(createCommunityDto: CreateCommunityDto) {
     const data = {
       name: createCommunityDto.name,
       description: createCommunityDto.description,
@@ -19,7 +19,7 @@ export class CommunitiesService {
       },
     };
 
-    return this.prisma.community.create({
+    const community = await this.prisma.community.create({
       data,
       select: {
         id: true,
@@ -29,6 +29,17 @@ export class CommunitiesService {
         id_category: true,
       },
     });
+
+    if (createCommunityDto.id_user) {
+      await this.prisma.moderator.create({
+        data: {
+          id_user: createCommunityDto.id_user,
+          id_community: community.id,
+        },
+      });
+    }
+
+    return community;
   }
 
   findAll() {
@@ -112,7 +123,7 @@ export class CommunitiesService {
   }
 
   count() {
-    return this.prisma.community.count();
+    return this.prisma.community.count({ where: { status: Status.APPROVED } });
   }
 
   update(id: string, updateCommunityDto: UpdateCommunityDto) {
