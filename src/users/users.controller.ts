@@ -26,6 +26,11 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get('count')
+  count() {
+    return this.usersService.count();
+  }
+
   @Get('token')
   findUserFromToken(@Headers('Authorization') auth: string) {
     return this.usersService.findUserFromToken(auth);

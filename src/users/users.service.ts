@@ -65,6 +65,10 @@ export class UsersService {
     });
   }
 
+  count() {
+    return this.prisma.user.count();
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     const passEncrypted = await bcrypt.hash(updateUserDto.password, 10);
     return this.prisma.user.update({
