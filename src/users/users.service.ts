@@ -69,6 +69,14 @@ export class UsersService {
     return this.prisma.user.count();
   }
 
+  async isModerator(id_user: string, id_community: string) {
+    const count = await this.prisma.moderator.count({
+      where: { id_user, id_community },
+    });
+
+    return Boolean(count);
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     const passEncrypted = await bcrypt.hash(updateUserDto.password, 10);
     return this.prisma.user.update({

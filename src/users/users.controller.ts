@@ -36,6 +36,14 @@ export class UsersController {
     return this.usersService.findUserFromToken(auth);
   }
 
+  @Get('ismoderator/:id_user/:id_community')
+  isModerator(
+    @Param('id_user') id_user: string,
+    @Param('id_community') id_community: string,
+  ) {
+    return this.usersService.isModerator(id_user, id_community);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
