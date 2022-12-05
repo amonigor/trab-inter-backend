@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma.service';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async create(createUserDto: CreateUserDto) {
     const passEncrypted = await bcrypt.hash(createUserDto.password, 10);
@@ -42,6 +43,19 @@ export class UsersService {
   findOne(id: string) {
     return this.prisma.user.findUnique({
       where: { id },
+      select: {
+        id: true,
+        username: true,
+        name: true,
+        email: true,
+      },
+    });
+  }
+
+  findUserFromToken(auth: string) {
+    const tokenDecoded: any = this.jwtService.decode(auth);
+    return this.prisma.user.findUnique({
+      where: { email: tokenDecoded.email },
       select: {
         id: true,
         username: true,
