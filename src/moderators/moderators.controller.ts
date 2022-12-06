@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ModeratorsService } from './moderators.service';
 import { CreateModeratorDto } from './dto/create-moderator.dto';
+import { InviteModeratorDto } from './dto/invite-moderator.dto';
 
 @Controller('moderators')
 export class ModeratorsController {
@@ -9,6 +10,11 @@ export class ModeratorsController {
   @Post()
   create(@Body() createModeratorDto: CreateModeratorDto) {
     return this.moderatorsService.create(createModeratorDto);
+  }
+
+  @Post('invite')
+  invite(@Body() inviteModeratorDto: InviteModeratorDto) {
+    return this.moderatorsService.invite(inviteModeratorDto);
   }
 
   @Get()

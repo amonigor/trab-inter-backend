@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateModeratorDto } from './dto/create-moderator.dto';
+import { InviteModeratorDto } from './dto/invite-moderator.dto';
 
 @Injectable()
 export class ModeratorsService {
@@ -49,6 +50,21 @@ export class ModeratorsService {
         id_community: true,
       },
     });
+  }
+
+  async invite(inviteModeratorDto: InviteModeratorDto) {
+    const user = await this.prisma.user.findFirst({
+      where: { email: inviteModeratorDto.email },
+    });
+
+    if (user) {
+      await this.prisma.moderator.create({
+        data: {
+          id_user: user.id,
+          id_community: inviteModeratorDto.id_community,
+        },
+      });
+    }
   }
 
   findModeratorsByCommunity(id_community: string) {
