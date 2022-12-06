@@ -51,6 +51,25 @@ export class ModeratorsService {
     });
   }
 
+  findModeratorsByCommunity(id_community: string) {
+    return this.prisma.moderator.findMany({
+      where: { id_community },
+      select: {
+        id: true,
+        id_user: true,
+        id_community: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+
   remove(id: string, id_user: string, id_community: string) {
     return this.prisma.moderator.delete({
       where: { id_id_user_id_community: { id, id_user, id_community } },

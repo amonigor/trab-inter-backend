@@ -14,6 +14,7 @@ import { CreateCommunityDto } from './dto/create-community.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
 import { ContentStatus, Status } from '@prisma/client';
 import { SuggestionsService } from 'src/suggestions/suggestions.service';
+import { ModeratorsService } from 'src/moderators/moderators.service';
 
 @Controller('communities')
 export class CommunitiesController {
@@ -21,6 +22,7 @@ export class CommunitiesController {
     private readonly communitiesService: CommunitiesService,
     private readonly contentsService: ContentsService,
     private readonly suggestionsService: SuggestionsService,
+    private readonly moderatorsService: ModeratorsService,
   ) {}
 
   @Post()
@@ -70,6 +72,11 @@ export class CommunitiesController {
   @Get(':id/related')
   findRelatedCommunities(@Param('id') id: string) {
     return this.communitiesService.findRelatedCommunities(id);
+  }
+
+  @Get(':id/moderators')
+  findModeratorsByCommunity(@Param('id_community') id_community: string) {
+    return this.moderatorsService.findModeratorsByCommunity(id_community);
   }
 
   @Patch(':id')

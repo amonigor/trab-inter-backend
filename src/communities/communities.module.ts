@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { CommunitiesService } from './communities.service';
 import { CommunitiesController } from './communities.controller';
 import { SuggestionsService } from 'src/suggestions/suggestions.service';
+import { ModeratorsService } from 'src/moderators/moderators.service';
 
 @Module({
   controllers: [CommunitiesController],
@@ -12,6 +13,7 @@ import { SuggestionsService } from 'src/suggestions/suggestions.service';
     PrismaService,
     ContentsService,
     SuggestionsService,
+    ModeratorsService,
   ],
 })
 export class CommunitiesModule {}
