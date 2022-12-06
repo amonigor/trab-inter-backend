@@ -129,7 +129,17 @@ export class CommunitiesService {
   async findCommunitiesByUser(id_user: string) {
     const mod_com = await this.prisma.moderator.findMany({
       where: { id_user },
-      include: { community: true },
+      include: {
+        community: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+            category: true,
+            _count: true,
+          },
+        },
+      },
     });
 
     return mod_com.map((item) => item.community);
