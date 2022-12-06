@@ -92,6 +92,20 @@ export class SuggestionsService {
     });
   }
 
+  approve(id: string) {
+    return this.prisma.suggestion.update({
+      where: { id },
+      data: { status: Status.APPROVED },
+    });
+  }
+
+  deny(id: string) {
+    return this.prisma.suggestion.update({
+      where: { id },
+      data: { status: Status.DENIED },
+    });
+  }
+
   update(id: string, updateSuggestionDto: UpdateSuggestionDto) {
     const data = {
       status: updateSuggestionDto.status,

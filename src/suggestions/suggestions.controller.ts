@@ -20,6 +20,16 @@ export class SuggestionsController {
     return this.suggestionsService.create(createSuggestionDto);
   }
 
+  @Post(':id/approve')
+  approve(@Param('id') id: string) {
+    return this.suggestionsService.approve(id);
+  }
+
+  @Post(':id/deny')
+  deny(@Param('id') id: string) {
+    return this.suggestionsService.deny(id);
+  }
+
   @Get()
   findAll() {
     return this.suggestionsService.findAll();
