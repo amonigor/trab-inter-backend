@@ -52,6 +52,7 @@ export class CommunitiesService {
         category: true,
         _count: true,
       },
+      take: 6,
     });
   }
 
