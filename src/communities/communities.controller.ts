@@ -74,7 +74,7 @@ export class CommunitiesController {
     return this.communitiesService.findRelatedCommunities(id);
   }
 
-  @Get(':id/moderators')
+  @Get(':id_community/moderators')
   findModeratorsByCommunity(@Param('id_community') id_community: string) {
     return this.moderatorsService.findModeratorsByCommunity(id_community);
   }
