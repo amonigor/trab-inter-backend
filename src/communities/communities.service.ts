@@ -126,6 +126,15 @@ export class CommunitiesService {
     return this.prisma.community.count({ where: { status: Status.APPROVED } });
   }
 
+  async findCommunitiesByUser(id_user: string) {
+    const mod_com = await this.prisma.moderator.findMany({
+      where: { id_user },
+      include: { community: true },
+    });
+
+    return mod_com.map((item) => item.community);
+  }
+
   update(id: string, updateCommunityDto: UpdateCommunityDto) {
     return this.prisma.community.update({
       where: { id },

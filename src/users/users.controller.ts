@@ -11,10 +11,14 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CommunitiesService } from 'src/communities/communities.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly communitiesService: CommunitiesService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -42,6 +46,11 @@ export class UsersController {
     @Param('id_community') id_community: string,
   ) {
     return this.usersService.isModerator(id_user, id_community);
+  }
+
+  @Get(':id/communities')
+  findCommunitiesByUser(@Param('id') id: string) {
+    return this.communitiesService.findCommunitiesByUser(id);
   }
 
   @Get(':id')
