@@ -111,6 +111,9 @@ export class CommunitiesService {
           {
             id_category,
           },
+          {
+            status: Status.APPROVED,
+          },
         ],
       },
       select: {
